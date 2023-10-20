@@ -2,7 +2,7 @@
   <v-container class="fill-height text-center">
     <v-row>
       <v-col>
-        <div>Placeholder</div>
+        <nunchi-game></nunchi-game>
       </v-col>
     </v-row>
   </v-container>
