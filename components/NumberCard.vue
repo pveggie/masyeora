@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import { computed, reactive } from 'vue'
+import { computed, ref, reactive } from 'vue'
+import { useKoreanSpeech } from '../composables/useKoreanSpeech'
 const props = defineProps({
   value: { type: Number, default: 1 },
 })
+
+const isPlayDisabled = ref(false)
+
+const { sayStringInKorean } = useKoreanSpeech()
 
 interface CardNumber {
   value: number
@@ -18,7 +23,7 @@ const cardNumbers: CardNumber[] = reactive([
   { value: 5, latin: '5', sino: '오' },
   { value: 6, latin: '6', sino: '육' },
   { value: 7, latin: '7', sino: '칠' },
-  { value: 8, latin: '8', sino: '필' },
+  { value: 8, latin: '8', sino: '팔' },
   { value: 9, latin: '9', sino: '구' },
   { value: 10, latin: '10', sino: '십' },
 ])
@@ -36,9 +41,13 @@ const emit = defineEmits<{
   updateValue: [value: number]
 }>()
 
-const playCard = () => {
-  console.log('clicked')
-  emit('updateValue', props.value + 1)
+const playCard = async () => {
+  const newValue = props.value + 1
+  isPlayDisabled.value = true
+  await sayStringInKorean(cardNumberString.value)
+
+  emit('updateValue', newValue)
+  isPlayDisabled.value = false
 }
 </script>
 
@@ -46,9 +55,9 @@ const playCard = () => {
   <v-col sm="8" md="4" lg="2">
     <div class="number-card">
       <v-card
-        hover
+        :hover="!isPlayDisabled"
         class="number-card__content h-100 w-100 d-flex align-center"
-        @click="playCard"
+        @[!isPlayDisabled&&`click`]="playCard"
       >
         <v-card-text class="number-card__text">{{
           cardNumberString
