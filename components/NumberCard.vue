@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, reactive } from 'vue'
+import { computed, ref } from 'vue'
 import { useKoreanSpeech } from '../composables/useKoreanSpeech'
 const props = defineProps({
   value: { type: Number, default: 1 },
@@ -15,7 +15,7 @@ interface CardNumber {
   sino: string
 }
 
-const cardNumbers: CardNumber[] = reactive([
+const cardNumbers: CardNumber[] = [
   { value: 1, latin: '1', sino: '일' },
   { value: 2, latin: '2', sino: '이' },
   { value: 3, latin: '3', sino: '삼' },
@@ -26,7 +26,7 @@ const cardNumbers: CardNumber[] = reactive([
   { value: 8, latin: '8', sino: '팔' },
   { value: 9, latin: '9', sino: '구' },
   { value: 10, latin: '10', sino: '십' },
-])
+]
 
 const cardNumber = computed(() => {
   const cardNumber =
