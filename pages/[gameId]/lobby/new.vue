@@ -14,14 +14,13 @@ const formState = reactive({
   playerName: '',
 })
 
-const enterGameRoom = () => {
-  console.log('isFormValid', isFormValid)
-  navigateTo({ path: roomUrl, playerName: formState.playerName })
+const enterGameRoom = async () => {
+  await navigateTo({ path: roomUrl, query: {playerName: formState.playerName} })
 }
 
 const rules = {
-  required: (label) => {
-    return [(value) => !!value || `${label} is required.`]
+  required: (label: string) => {
+    return [(value: string) => !!value || `${label} is required.`]
   },
 }
 </script>
