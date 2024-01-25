@@ -1,9 +1,9 @@
 module.exports = {
   root: true,
   extends: [
-    '@nuxt/eslint-config',
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
+    '@nuxt/eslint-config',
     'prettier',
   ],
   parser: 'vue-eslint-parser',

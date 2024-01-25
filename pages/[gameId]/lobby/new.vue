@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
 import { useRoute, navigateTo } from 'nuxt/app'
 import { v4 as uuidv4 } from 'uuid'
 
 const route = useRoute()
-const gameId = route.params.gameId
+const gameId = (route.params.gameId as string) || ''
 const newRoomId = uuidv4()
 const isFormValid = ref(false)
+const [, setPlayerName] = useLocalStorage('nunchi-playerName')
 
 const roomUrl = `/${gameId}/rooms/${newRoomId}`
 
@@ -15,7 +15,15 @@ const formState = reactive({
 })
 
 const enterGameRoom = async () => {
-  await navigateTo({ path: roomUrl, query: {playerName: formState.playerName} })
+  const { playerName = '' } = formState
+
+  if (playerName) {
+    setPlayerName(playerName)
+    await navigateTo({
+      path: roomUrl,
+      query: { playerName: formState.playerName },
+    })
+  }
 }
 
 const rules = {

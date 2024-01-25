@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-
 const currentCardValue = ref(1)
 const maxCardValue = ref(10)
 
@@ -29,7 +27,7 @@ const resetGame = () => {
       <v-card width="50vw" height="50vh">
         <v-card-text> Game finished. </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" block @click="resetGame">Reset</v-btn>
+          <v-btn block color="primary" @click="resetGame">Reset</v-btn>
         </v-card-actions>
       </v-card>
       <v-card> </v-card>

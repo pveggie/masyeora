@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { useKoreanSpeech } from '../composables/useKoreanSpeech'
 const props = defineProps({
   value: { type: Number, default: 1 },
 })

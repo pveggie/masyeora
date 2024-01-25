@@ -14,7 +14,7 @@ export const useKoreanSpeech = () => {
       voices.value[1]
   })
 
-  const sayStringInKorean = (string: string | undefined) => {
+  const sayStringInKorean = (string: string = '') => {
     const spokenString = new SpeechSynthesisUtterance(string)
     spokenString.voice = voice.value
     spokenString.lang = 'ko'
