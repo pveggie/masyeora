@@ -17,6 +17,11 @@ export default defineNuxtConfig({
       })
     },
   ],
+  runtimeConfig: {
+    public: {
+      ablyAuthUrl: process.env.ABLY_AUTH_URL,
+    },
+  },
   vite: {
     vue: {
       template: {
